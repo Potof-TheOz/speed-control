@@ -19,6 +19,8 @@ jobs:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
       - run: npm install
+      - run: npm run lint
+      - run: npm run type-check
       - run: npm run test-ci
       - uses: ArtiomTr/jest-coverage-report-action@v2
         with:
