@@ -6,7 +6,7 @@ const main: SpeedControl.mainFunction = function (
   // force et honneur
   return {
     speeding: false,
-    speedDelta: 0,
+    delta: 0,
     legalSpeed: 0,
     vehicleLicensePlate: '',
   };
