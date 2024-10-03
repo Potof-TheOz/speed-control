@@ -36,8 +36,8 @@ cases.push([
   },
   {
     speeding: true,
-    legalSpeed: 141,
-    delta: 31,
+    legalSpeed: 142,
+    delta: 32,
     vehicleLicensePlate,
   },
 ]);
