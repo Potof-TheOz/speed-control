@@ -2,14 +2,18 @@ const main: SpeedControl.mainFunction = function (
   _turretConfiguration,
   _sensorData
 ) {
-  const { maxSpeed, rainingMaxSpeed } = _turretConfiguration;
-  const { speed, vehicleLicensePlate, raining } = _sensorData;
+  const { maxSpeed, rainingMaxSpeed, newbieMaxSpeed } = _turretConfiguration;
+  const { speed, vehicleLicensePlate, raining, newbie } = _sensorData;
 
   let legalSpeed = 0;
   let totalSpeed = maxSpeed;
 
   if (raining && rainingMaxSpeed) {
     totalSpeed = rainingMaxSpeed;
+  }
+
+  if (newbie && newbieMaxSpeed) {
+    totalSpeed = newbieMaxSpeed;
   }
 
   switch (true) {
