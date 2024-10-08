@@ -4,6 +4,8 @@ declare namespace SpeedControl {
     maxSpeed: number;
     // Limite de vitesse (en km/h) autorisée pour temps de pluie
     rainingMaxSpeed?: number;
+    // Limite de vitesse (en km/h) autorisée pour les jeunes conducteurs
+    newbieMaxSpeed?: number;
   }
 
   export interface SensorData {
@@ -13,6 +15,8 @@ declare namespace SpeedControl {
     vehicleLicensePlate: string;
     // Est-ce qu'il pleut sur la route surveillée
     raining?: boolean;
+    // Est-ce que le véhicule est identifié en tant que jeune conducteur?
+    newbie?: boolean;
   }
 
   export interface TurretResponse {
