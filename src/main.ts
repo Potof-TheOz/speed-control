@@ -2,10 +2,15 @@ const main: SpeedControl.mainFunction = function (
   _turretConfiguration,
   _sensorData
 ) {
-  const { maxSpeed } = _turretConfiguration;
-  const { speed, vehicleLicensePlate } = _sensorData;
+  const { maxSpeed, rainingMaxSpeed } = _turretConfiguration;
+  const { speed, vehicleLicensePlate, raining } = _sensorData;
 
   let legalSpeed = 0;
+  let totalSpeed = maxSpeed;
+
+  if (raining && rainingMaxSpeed) {
+    totalSpeed = rainingMaxSpeed;
+  }
 
   switch (true) {
     case speed < 100:
@@ -17,8 +22,8 @@ const main: SpeedControl.mainFunction = function (
   }
 
   return {
-    speeding: speed >= maxSpeed,
-    delta: speed >= maxSpeed ? Math.ceil(legalSpeed - maxSpeed) : 0,
+    speeding: speed >= totalSpeed,
+    delta: speed >= totalSpeed ? Math.ceil(legalSpeed - totalSpeed) : 0,
     legalSpeed: Math.ceil(legalSpeed),
     vehicleLicensePlate: vehicleLicensePlate,
   };
