@@ -2,6 +2,8 @@ declare namespace SpeedControl {
   export interface TurretConfiguration {
     // Limite de vitesse (en km/h) autorisée sur la section de route surveillée par le radar
     maxSpeed: number;
+    // Limite de vitesse (en km/h) autorisée pour temps de pluie
+    rainingMaxSpeed?: number;
   }
 
   export interface SensorData {
@@ -9,6 +11,8 @@ declare namespace SpeedControl {
     speed: number;
     // plaque d'immatriculation du véhicule contrôlé
     vehicleLicensePlate: string;
+    // Est-ce qu'il pleut sur la route surveillée
+    raining?: boolean;
   }
 
   export interface TurretResponse {
