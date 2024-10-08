@@ -6,6 +6,8 @@ declare namespace SpeedControl {
     rainingMaxSpeed?: number;
     // Limite de vitesse (en km/h) autorisée pour les jeunes conducteurs
     newbieMaxSpeed?: number;
+    // Limite de vitesse (en km/h) autorisée pour les poids lourds
+    truckMaxSpeed?: number;
   }
 
   export interface SensorData {
@@ -17,6 +19,8 @@ declare namespace SpeedControl {
     raining?: boolean;
     // Est-ce que le véhicule est identifié en tant que jeune conducteur?
     newbie?: boolean;
+    // Est-ce que le véhicule est un poids lourd
+    truck?: boolean;
   }
 
   export interface TurretResponse {
