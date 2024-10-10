@@ -7,8 +7,7 @@ const main: SpeedControl.mainFunction = function (
   const { speed, vehicleLicensePlate, raining, newbie, truck } = _sensorData;
 
   let legalSpeed = 0;
-  let totalSpeed = 0;
-  let speedArray = [maxSpeed];
+  const speedArray = [maxSpeed];
 
   if (raining && rainingMaxSpeed) {
     speedArray.push(rainingMaxSpeed);
@@ -22,7 +21,7 @@ const main: SpeedControl.mainFunction = function (
     speedArray.push(truckMaxSpeed);
   }
 
-  totalSpeed = Math.min(...speedArray);
+  const totalSpeed = Math.min(...speedArray);
 
   switch (true) {
     case speed < 100:
