@@ -43,7 +43,7 @@ declare namespace SpeedControl {
     TurretResponseSpeeding,
     'speeding'
   > & {
-    // Est-ce que le véhicule contrôlé est en excès de vitesse ou non
+    // Est-ce que le véhicule contrôlé est en dessous de la vitesse minimale
     lowSpeeding: boolean;
   };
 
