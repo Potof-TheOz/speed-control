@@ -33,7 +33,7 @@ declare namespace SpeedControl {
     // plaque d'immatriculation du véhicule contrôlé
     vehicleLicensePlate: string;
     // Est-ce que le véhicule contrôlé est en excès de vitesse ou non
-    speeding?: boolean;
+    speeding: boolean;
     // Vitesse retenue pour le véhicule contrôlé
     legalSpeed: number;
     // Différence entre la vitesse maximale autorisée et la vitesse retenue pour le véhicule contrôlé
