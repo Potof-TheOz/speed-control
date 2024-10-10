@@ -8,6 +8,8 @@ declare namespace SpeedControl {
     newbieMaxSpeed?: number;
     // Limite de vitesse (en km/h) autorisée pour les poids lourds
     truckMaxSpeed?: number;
+    // Vitesse minimale (en km/h) autorisée sur la voie de gauche
+    minSpeedOnLeftLine?: number;
   }
 
   export interface SensorData {
@@ -21,18 +23,33 @@ declare namespace SpeedControl {
     newbie?: boolean;
     // Est-ce que le véhicule est un poids lourd
     truck?: boolean;
+    // Est-ce que le véhicule contrôlé est sur la voie la plus à gauche du traffic
+    onLeftLine?: boolean;
+    // Est-ce que le traffic est fluide?
+    fluentTraffic?: boolean;
   }
 
-  export interface TurretResponse {
+  export interface TurretResponseSpeeding {
     // plaque d'immatriculation du véhicule contrôlé
     vehicleLicensePlate: string;
     // Est-ce que le véhicule contrôlé est en excès de vitesse ou non
-    speeding: boolean;
+    speeding?: boolean;
     // Vitesse retenue pour le véhicule contrôlé
     legalSpeed: number;
     // Différence entre la vitesse maximale autorisée et la vitesse retenue pour le véhicule contrôlé
     delta: number;
   }
+  export type TurretResponseLowSpeeding = Omit<
+    TurretResponseSpeeding,
+    'speeding'
+  > & {
+    // Est-ce que le véhicule contrôlé est en excès de vitesse ou non
+    lowSpeeding: boolean;
+  };
+
+  export type TurretResponse =
+    | TurretResponseLowSpeeding
+    | TurretResponseSpeeding;
 
   export type mainFunction = (
     turretConfiguration: TurretConfiguration,
