@@ -2,19 +2,27 @@ const main: SpeedControl.mainFunction = function (
   _turretConfiguration,
   _sensorData
 ) {
-  const { maxSpeed, rainingMaxSpeed, newbieMaxSpeed } = _turretConfiguration;
-  const { speed, vehicleLicensePlate, raining, newbie } = _sensorData;
+  const { maxSpeed, rainingMaxSpeed, newbieMaxSpeed, truckMaxSpeed } =
+    _turretConfiguration;
+  const { speed, vehicleLicensePlate, raining, newbie, truck } = _sensorData;
 
   let legalSpeed = 0;
-  let totalSpeed = maxSpeed;
+  let totalSpeed = 0;
+  let speedArray = [maxSpeed];
 
   if (raining && rainingMaxSpeed) {
-    totalSpeed = rainingMaxSpeed;
+    speedArray.push(rainingMaxSpeed);
   }
 
   if (newbie && newbieMaxSpeed) {
-    totalSpeed = newbieMaxSpeed;
+    speedArray.push(newbieMaxSpeed);
   }
+
+  if (truck && truckMaxSpeed) {
+    speedArray.push(truckMaxSpeed);
+  }
+
+  totalSpeed = Math.min(...speedArray);
 
   switch (true) {
     case speed < 100:
