@@ -2,9 +2,22 @@ const main: SpeedControl.mainFunction = function (
   _turretConfiguration,
   _sensorData
 ) {
-  const { maxSpeed, rainingMaxSpeed, newbieMaxSpeed, truckMaxSpeed } =
-    _turretConfiguration;
-  const { speed, vehicleLicensePlate, raining, newbie, truck } = _sensorData;
+  const {
+    maxSpeed,
+    rainingMaxSpeed,
+    newbieMaxSpeed,
+    truckMaxSpeed,
+    minSpeedOnLeftLine,
+  } = _turretConfiguration;
+  const {
+    speed,
+    vehicleLicensePlate,
+    raining,
+    newbie,
+    truck,
+    onLeftLine,
+    fluentTraffic,
+  } = _sensorData;
 
   let legalSpeed = 0;
   const speedArray = [maxSpeed];
@@ -21,6 +34,17 @@ const main: SpeedControl.mainFunction = function (
     speedArray.push(truckMaxSpeed);
   }
 
+  let lowSpeeding = false;
+
+  if (
+    onLeftLine &&
+    fluentTraffic &&
+    minSpeedOnLeftLine &&
+    speed <= minSpeedOnLeftLine
+  ) {
+    lowSpeeding = true;
+  }
+
   const totalSpeed = Math.min(...speedArray);
 
   switch (true) {
@@ -32,12 +56,28 @@ const main: SpeedControl.mainFunction = function (
       break;
   }
 
-  return {
-    speeding: speed >= totalSpeed,
-    delta: speed >= totalSpeed ? Math.ceil(legalSpeed - totalSpeed) : 0,
+  const calcDelta =
+    speed >= totalSpeed ? Math.ceil(legalSpeed - totalSpeed) : 0;
+
+  const resultControlSpeeding: SpeedControl.TurretResponseSpeeding = {
+    delta: calcDelta,
     legalSpeed: Math.ceil(legalSpeed),
     vehicleLicensePlate: vehicleLicensePlate,
+    speeding: speed >= totalSpeed,
   };
+
+  const resultControlLowSpeeding: SpeedControl.TurretResponseLowSpeeding = {
+    delta: minSpeedOnLeftLine ? legalSpeed - minSpeedOnLeftLine : 0,
+    legalSpeed: Math.ceil(legalSpeed),
+    vehicleLicensePlate: vehicleLicensePlate,
+    lowSpeeding: lowSpeeding,
+  };
+
+  if (lowSpeeding) {
+    return resultControlLowSpeeding;
+  } else {
+    return resultControlSpeeding;
+  }
 };
 
 export default main;
